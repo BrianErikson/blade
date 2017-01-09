@@ -17,6 +17,7 @@ int main(int argc, char** argv) {
         blade_timer_start();
         blade_update();
         blade_render();
+        blade_window_swapBuffers();
         blade_pollEvents();
         blade_timer_stop();
     } while (!blade_window_shouldClose());

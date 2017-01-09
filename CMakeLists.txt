@@ -5,17 +5,20 @@ set(CMAKE_BUILD_TYPE DEBUG)
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
 find_package(GLEW REQUIRED)
+find_package(OpenGL REQUIRED)
 
 set(SOURCE_FILES src/blade.c src/blade.h)
 include_directories(
-        ${GLFW_INCLUDE_DIRS}
+        ${OPENGL_INCLUDE_DIRS}
         ${GLEW_INCLUDE_DIRS}
+        ${GLFW_INCLUDE_DIRS}
         /usr/local/include/
 )
 
 add_library(blade STATIC ${SOURCE_FILES})
 
 target_link_libraries(blade
+        ${OPENGL_LIBRARIES}
         ${GLFW_LIBRARIES}
         ${GLEW_LIBRARIES}
         m
