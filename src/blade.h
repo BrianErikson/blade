@@ -6,13 +6,14 @@
 #define BLADE_BLADE_H
 
 #include <stdint.h>
+#include "io.h"
 
 #define BLADE_OK 0
 #define BLADE_ERR_INIT_GLFW 1
 #define BLADE_ERR_INIT_GLFW_WINDOW 2
 #define BLADE_ERR_INIT_GLEW 3
 
-int blade_init(const char *appName, int screenWidth, int screenHeight);
+char blade_init(const char *appName, int screenWidth, int screenHeight);
 void blade_terminate();
 
 void blade_update();

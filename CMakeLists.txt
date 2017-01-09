@@ -7,7 +7,7 @@ pkg_search_module(GLFW REQUIRED glfw3)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-set(SOURCE_FILES src/blade.c src/blade.h)
+set(SOURCE_FILES src/blade.c src/blade.h src/io.c src/io.h)
 include_directories(
         ${OPENGL_INCLUDE_DIRS}
         ${GLEW_INCLUDE_DIRS}

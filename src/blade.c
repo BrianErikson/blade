@@ -9,10 +9,11 @@
 #include "GLFW/glfw3.h"
 
 GLFWwindow *window;
+GLuint shaderProgram;
 double startTime, prevDeltaTime, deltaTime;
 
 
-int blade_init(const char *appName, int screenWidth, int screenHeight) {
+char blade_init(const char *appName, int screenWidth, int screenHeight) {
     if (!glfwInit()) {
         fprintf(stderr, "GLFW could not instantiate\n");
         return BLADE_ERR_INIT_GLFW;
@@ -21,6 +22,8 @@ int blade_init(const char *appName, int screenWidth, int screenHeight) {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     window = glfwCreateWindow(screenWidth, screenHeight, appName, NULL, NULL);
     if (window == NULL) {
@@ -29,12 +32,27 @@ int blade_init(const char *appName, int screenWidth, int screenHeight) {
     }
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSwapInterval(1); // vsync -- waits for 1 monitor refresh before swapping
 
     int glewRes;
     if ((glewRes = glewInit()) != GLEW_OK) {
         fprintf(stderr, "Failed to initialize GLEW with an error code of %d\n",
                 glewRes);
+        blade_terminate();
         return BLADE_ERR_INIT_GLEW;
+    }
+
+    char result;
+    shaderProgram = blade_io_compileShader(
+            "../res/shaders/default_vertex.glsl",
+            "../res/shaders/default_fragment.glsl",
+            &result
+    );
+
+    if (result != 0) {
+        fprintf(stderr, "Error compiling shaders. Error code %d\n", result);
+        blade_terminate();
+        return result;
     }
 
     return BLADE_OK;
@@ -50,6 +68,7 @@ void blade_update() {
 }
 
 void blade_render() {
+    glUseProgram(shaderProgram);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

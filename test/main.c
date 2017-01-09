@@ -2,13 +2,14 @@
 // Created by brian on 1/8/17.
 //
 
+#include <stdio.h>
 #include "../src/blade.h"
 
 int main(int argc, char** argv) {
     unsigned int ct, lt, dt; // time
     double dts; // delta-time in seconds
 
-    int result;
+    char result;
     if ((result = blade_init("BladeTest", 1920, 1080)) != BLADE_OK) {
         return result;
     }
