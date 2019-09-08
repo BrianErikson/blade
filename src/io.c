@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <GL/glew.h>
 
-char* blade_io_fileToString(const char *path) {
+char *blade_io_fileToString(const char *path) {
     FILE *file;
 
     file = fopen(path, "rb");
@@ -18,7 +18,7 @@ char* blade_io_fileToString(const char *path) {
     fseek(file, 0, SEEK_SET);
 
     size_t num;
-    char* buf = calloc((size_t) size, sizeof(char));
+    char *buf = calloc((size_t) size, sizeof(char));
     fread(buf, 1, (size_t) size, file);
     buf[size - 1] = '\0';
 

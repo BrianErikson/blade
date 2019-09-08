@@ -16,7 +16,7 @@
  * @param path
  * @return a calloc'd string. Free when done.
  */
-char* blade_io_fileToString(const char *path);
+char *blade_io_fileToString(const char *path);
 
 GLuint blade_io_compileShader(const char *vertPath, const char *fragPath,
                               char *errorCode);

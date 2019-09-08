@@ -12,7 +12,6 @@ GLFWwindow *window;
 GLuint shaderProgram;
 double startTime, prevDeltaTime, deltaTime;
 
-
 char blade_init(const char *appName, int screenWidth, int screenHeight) {
     if (!glfwInit()) {
         fprintf(stderr, "GLFW could not instantiate\n");

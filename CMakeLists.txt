@@ -4,25 +4,34 @@ set(CMAKE_BUILD_TYPE DEBUG)
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
+pkg_search_module(CGLM REQUIRED cglm)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-set(SOURCE_FILES src/blade.c src/blade.h src/io.c src/io.h)
-include_directories(
-        ${OPENGL_INCLUDE_DIRS}
-        ${GLEW_INCLUDE_DIRS}
-        ${GLFW_INCLUDE_DIRS}
-        /usr/local/include/
+set(HEADERS
+    src/blade.h
+    src/io.h
 )
 
-add_library(blade STATIC ${SOURCE_FILES})
+set(SOURCE
+    src/blade.c
+    src/io.c
+)
+
+include_directories(
+    ${OPENGL_INCLUDE_DIRS}
+    ${GLEW_INCLUDE_DIRS}
+    ${GLFW_INCLUDE_DIRS}
+    ${CGLM_INCLUDE_DIRS}
+)
+
+add_library(blade STATIC ${SOURCE})
 
 target_link_libraries(blade
-        ${OPENGL_LIBRARIES}
-        ${GLFW_LIBRARIES}
-        ${GLEW_LIBRARIES}
-        m
-        /usr/local/lib/libgl-matrix.a
+    ${OPENGL_LIBRARIES}
+    ${GLFW_LIBRARIES}
+    ${GLEW_LIBRARIES}
+    ${CGLM_LIBRARIES}
 )
 
 add_executable(bladeTest test/main.c)
