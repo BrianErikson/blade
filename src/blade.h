@@ -1,7 +1,3 @@
-//
-// Created by brian on 1/8/17.
-//
-
 #ifndef BLADE_BLADE_H
 #define BLADE_BLADE_H
 
@@ -13,18 +9,18 @@
 #define BLADE_ERR_INIT_GLFW_WINDOW 2
 #define BLADE_ERR_INIT_GLEW 3
 
-char blade_init(const char *appName, int screenWidth, int screenHeight);
-void blade_terminate();
+char bld_init(const char *appName, int screenWidth, int screenHeight);
+void bld_terminate();
 
-void blade_update();
-void blade_render();
-void blade_pollEvents();
-double blade_deltaTime();
+void bld_update();
+void bld_render();
+void bld_pollEvents();
+double bld_deltaTime();
 
-int blade_window_shouldClose();
-void blade_window_swapBuffers();
+int bld_window_shouldClose();
+void bld_window_swapBuffers();
 
-void blade_timer_start();
-double blade_timer_stop();
+void bld_timer_start();
+double bld_timer_stop();
 
 #endif //BLADE_BLADE_H

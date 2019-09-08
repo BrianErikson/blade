@@ -1,7 +1,3 @@
-//
-// Created by brian on 12/21/16.
-//
-
 #ifndef BLADE_IO_H
 #define BLADE_IO_H
 
@@ -16,9 +12,9 @@
  * @param path
  * @return a calloc'd string. Free when done.
  */
-char *blade_io_fileToString(const char *path);
+char *bld_io_fileToString(const char *path);
 
-GLuint blade_io_compileShader(const char *vertPath, const char *fragPath,
-                              char *errorCode);
+GLuint bld_io_compileShader(const char *vertPath, const char *fragPath,
+                            char *errorCode);
 
 #endif //BLADE_IO_H

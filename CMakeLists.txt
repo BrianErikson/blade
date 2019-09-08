@@ -18,7 +18,7 @@ set(HEADERS
 set(SOURCE
     src/blade.c
     src/io.c
-)
+    src/mesh/mesh.h src/mesh/mesh.c src/mesh/primitives.h src/mesh/primitives.c)
 
 include_directories(
     ${OPENGL_INCLUDE_DIRS}

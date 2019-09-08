@@ -7,7 +7,8 @@
 #include <stdlib.h>
 #include <GL/glew.h>
 
-char *blade_io_fileToString(const char *path) {
+char *bld_io_fileToString(const char *path)
+{
     FILE *file;
 
     file = fopen(path, "rb");
@@ -26,7 +27,8 @@ char *blade_io_fileToString(const char *path) {
     return buf;
 }
 
-GLuint compileShader(const char *fs, GLenum shaderType, char *error) {
+GLuint compileShader(const char *fs, GLenum shaderType, char *error)
+{
     GLuint shader = glCreateShader(shaderType);
     glShaderSource(shader, 1, &fs, NULL);
     glCompileShader(shader);
@@ -56,7 +58,8 @@ GLuint compileShader(const char *fs, GLenum shaderType, char *error) {
     return shader;
 }
 
-GLuint compileShaderProgram(GLuint vert, GLuint frag, char *error) {
+GLuint compileShaderProgram(GLuint vert, GLuint frag, char *error)
+{
     GLuint program;
     program = glCreateProgram();
     glAttachShader(program, vert);
@@ -82,14 +85,15 @@ GLuint compileShaderProgram(GLuint vert, GLuint frag, char *error) {
     return program;
 }
 
-GLuint blade_io_compileShader(const char *vertPath, const char *fragPath,
-                              char *errorCode) {
+GLuint bld_io_compileShader(const char *vertPath, const char *fragPath,
+                            char *errorCode)
+{
     char *vs, *fs;
     GLuint program, vert, frag;
 
     *errorCode = 0;
-    vs = blade_io_fileToString(vertPath);
-    fs = blade_io_fileToString(fragPath);
+    vs = bld_io_fileToString(vertPath);
+    fs = bld_io_fileToString(fragPath);
 
     vert = compileShader(vs, GL_VERTEX_SHADER, errorCode);
     if (*errorCode > 0) {

@@ -10,20 +10,20 @@ int main(int argc, char** argv) {
     double dts; // delta-time in seconds
 
     char result;
-    if ((result = blade_init("BladeTest", 1920, 1080)) != BLADE_OK) {
+    if ((result = bld_init("BladeTest", 1920, 1080)) != BLADE_OK) {
         return result;
     }
 
     do {
-        blade_timer_start();
-        blade_update();
-        blade_render();
-        blade_window_swapBuffers();
-        blade_pollEvents();
-        blade_timer_stop();
-    } while (!blade_window_shouldClose());
+        bld_timer_start();
+        bld_update();
+        bld_render();
+        bld_window_swapBuffers();
+        bld_pollEvents();
+        bld_timer_stop();
+    } while (!bld_window_shouldClose());
 
-    blade_terminate();
+    bld_terminate();
 
     return 0;
 }

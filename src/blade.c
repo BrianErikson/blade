@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "blade.h"
+#include "bld.h"
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
@@ -12,7 +12,8 @@ GLFWwindow *window;
 GLuint shaderProgram;
 double startTime, prevDeltaTime, deltaTime;
 
-char blade_init(const char *appName, int screenWidth, int screenHeight) {
+char bld_init(const char *appName, int screenWidth, int screenHeight)
+{
     if (!glfwInit()) {
         fprintf(stderr, "GLFW could not instantiate\n");
         return BLADE_ERR_INIT_GLFW;
@@ -37,36 +38,39 @@ char blade_init(const char *appName, int screenWidth, int screenHeight) {
     if ((glewRes = glewInit()) != GLEW_OK) {
         fprintf(stderr, "Failed to initialize GLEW with an error code of %d\n",
                 glewRes);
-        blade_terminate();
+        bld_terminate();
         return BLADE_ERR_INIT_GLEW;
     }
 
     char result;
-    shaderProgram = blade_io_compileShader(
-            "../res/shaders/default_vertex.glsl",
-            "../res/shaders/default_fragment.glsl",
-            &result
+    shaderProgram = bld_io_compileShader(
+        "../res/shaders/default_vertex.glsl",
+        "../res/shaders/default_fragment.glsl",
+        &result
     );
 
     if (result != 0) {
         fprintf(stderr, "Error compiling shaders. Error code %d\n", result);
-        blade_terminate();
+        bld_terminate();
         return result;
     }
 
     return BLADE_OK;
 }
 
-void blade_terminate() {
+void bld_terminate()
+{
     if (window != NULL)
         glfwTerminate();
 }
 
-void blade_update() {
+void bld_update()
+{
 
 }
 
-void blade_render() {
+void bld_render()
+{
     glUseProgram(shaderProgram);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -74,11 +78,13 @@ void blade_render() {
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-void blade_pollEvents() {
+void bld_pollEvents()
+{
     glfwPollEvents();
 }
 
-int blade_window_shouldClose() {
+int bld_window_shouldClose()
+{
     int result = 0;
     if (window != NULL) {
         if (glfwWindowShouldClose(window)) {
@@ -89,19 +95,23 @@ int blade_window_shouldClose() {
     return result;
 }
 
-void blade_window_swapBuffers() {
+void bld_window_swapBuffers()
+{
     glfwSwapBuffers(window);
 }
 
-void blade_timer_start() {
+void bld_timer_start()
+{
     startTime = glfwGetTime();
 }
 
-double blade_timer_stop() {
+double bld_timer_stop()
+{
     deltaTime = glfwGetTime() - startTime;
     return deltaTime;
 }
 
-double blade_deltaTime() {
+double bld_deltaTime()
+{
     return deltaTime;
 }
